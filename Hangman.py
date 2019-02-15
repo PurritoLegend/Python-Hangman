@@ -1,29 +1,27 @@
 import time
 from random import choice
 
-file = open("Users", "r")
-users = file.read().splitlines()
+with open("Users", "r") as file:
+    users = file.readlines()
+    
+with open('Words', 'r') as file:
+    words = file.readlines()
 
 name = input("What is your name? ")
 if name in users:
-    print("Welcome back", name)
+    print(f"Welcome back {name}")
 else:
-    print("Hello " + name, ", Time to play hangman!", sep = "")
-    filea = open("Users", "a")
-    filea.write("\n" + name)
-    filea.close()
+    print(f"Hello {name}, Time to play hangman!")
+    with open("Users", "a") as file:
+        file.write("\n" + name)
 time.sleep(1)
 print("Start guessing...")
 time.sleep(0.5)
 
 def PlayHangman():
-    wordFile = open('Words', 'r')
-    words = wordFile.read().splitlines()
-
     word = choice(words)
     guesses = ''
     turns = 10
-    file = open("Users", "r")
 
     while True:         
         failed = 0
@@ -36,12 +34,12 @@ def PlayHangman():
                 failed += 1    
         print("")
         if failed == 0:
-            print("You won")
+            print("You won!")
             break              
 
         guess = input("guess a character:")
         if guess in guesses:
-            print("You alreay guessed that \n Guess something else")
+            print("You alreay guessed that!\nGuess something else.")
         elif len(guess) > 1:
             print("Guess ONE character")
         else:
@@ -54,10 +52,8 @@ def PlayHangman():
                     print("The word was", word)
                     break
                 else:
-                    print("You have", + turns, 'more failures')  
-    answer = input("Do you want to play again?(y/n)")
-    if answer == "y" or answer == "Y" or answer == "yes":
+                    print(f"You have {turns} more failures")  
+    answer = input("Do you want to play again? (y/n)")
+    if answer.lower() in {'y', 'yes'}:
         PlayHangman()
 PlayHangman()
-        
-
