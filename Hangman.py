@@ -47,14 +47,14 @@ def PlayHangman():
             guesses += guess
             if guess not in word:  
                 turns -= 1        
-                print("Wrong")    
+                print("Wrong!")    
                 if turns == 0:           
                     print("You Lose")
                     print("The word was", word)
                     break
                 else:
                     print(f"You have {turns} more failures")  
-    answer = input("Do you want to play again? (y/n)")
+    answer = input("Do you want to play again? (y/n) ")
     if answer.lower() in {'y', 'yes'}:
         PlayHangman()
 PlayHangman()
