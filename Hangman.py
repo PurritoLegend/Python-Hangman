@@ -14,6 +14,7 @@ else:
     print(f"Hello {name}, Time to play hangman!")
     with open("Users", "a") as file:
         file.write("\n" + name)
+
 time.sleep(1)
 print("Start guessing...")
 time.sleep(0.5)
